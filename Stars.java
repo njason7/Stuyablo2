@@ -27,8 +27,6 @@ public class Stars{
 	}
 	return str;
     }
-    public static String triBack(int s){
-	int
     public static void main (String[]args){
 	System.out.println(rect(2,3));
 	System.out.println(tri(3));
