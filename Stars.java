@@ -27,8 +27,27 @@ public class Stars{
 	}
 	return str;
     }
+    public static String triBack(int s){
+	int count=0;
+	String str="";
+	while (count<s){
+	    int count2=0;
+	    while (count2+count<s-1){
+		str+=" ";
+		count2++;
+	    }
+	    while (count2<s){
+		str+="*";
+		count2++;
+	    }
+	    str+="\n";
+	    count++;
+	}
+	return str;
+    }
     public static void main (String[]args){
 	System.out.println(rect(2,3));
 	System.out.println(tri(3));
+	System.out.println(triBack(3));
     }
 }
