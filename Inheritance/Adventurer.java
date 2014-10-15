@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Adventurer{
     private String name;
     private int HP, XP, STR, INT, DEX;
@@ -10,15 +11,18 @@ public class Adventurer{
     public Adventurer(String s, int startHP){
 	setName(s);
 	HP = startHP;
-	STR = 5;
-	INT = 5;
-	DEX = 5;
+	STR = 10;
+	INT = 10;
+	DEX = 10;
     }
     public String getName(){
 	return name;
     }
     public void setName(String s){
 	name = s;
+    }
+    public void setHP(int HP){
+	this.HP = HP;
     }
     public void setSTR(int STR){
 	this.STR = STR;
@@ -45,9 +49,37 @@ public class Adventurer{
 	return getName();
     }
     public void attack(Adventurer other){
-	System.out.println(this+" attacks "+other);
+	Random hitc = new Random();
+	Random hitdmg = new Random();
+	int dmg;
+	if (this.getDEX() > other.getDEX()){
+	    dmg = hitdmg.nextInt(3) + this.getSTR() - 4;
+	    System.out.println(this+" attacks "+other+" and did "+dmg+" damage.");
+	}else if ((this.getDEX() / other.getDEX()) > hitc.nextDouble()){
+	    dmg = hitdmg.nextInt(3) + this.getSTR() - 4;
+	    System.out.println(this+" attacks "+other+" and did "+dmg+" damage.");
+	}else{
+	    System.out.println(this+" attacks "+other+" and missed.");
+	    dmg = 0;
+	}
+	other.setHP(other.getHP() - dmg);
+	dmg = 0;
     }
     public void special(Adventurer other){
-	System.out.println(this+" unleashes a barrage of attacks against "+other);
+	Random hitc = new Random();
+	Random sphitdmg = new Random();
+	int spdmg;
+	if (this.getDEX() > other.getDEX()-2){
+	    spdmg = sphitdmg.nextInt(3) + this.getSTR() + 2;
+	    System.out.println(this+" unleashes a barrage of attacks against "+other+" and did "+spdmg+" damage.");
+	}else if ((this.getDEX() / (other.getDEX()-2)) > hitc.nextDouble()){
+	    spdmg = sphitdmg.nextInt(3) + this.getSTR() + 2;
+	    System.out.println(this+" unleashes a barrage of attacks against "+other+" and did "+spdmg+" damage.");
+	}else{
+	    System.out.println(this+" unleashes a barrage of attacks against "+other+" and missed.");
+	    spdmg = 0;
+	}
+	other.setHP(other.getHP() - spdmg);
+	spdmg = 0;
     }
 }
