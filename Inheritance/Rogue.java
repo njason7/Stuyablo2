@@ -25,7 +25,7 @@ public class Rogue extends Adventurer{
 	if (this.getDEX() > other.getDEX()){
 	    dmg = hitdmg.nextInt(3) + this.getSTR() - 5;
 	    System.out.println(this+" slashed at "+other+" and did "+dmg+" damage.");
-	}else if ((this.getDEX() / other.getDEX()) > hitc.nextDouble()){
+	}else if ((this.getDEX() / other.getDEX()) < hitc.nextDouble()){
 	    dmg = hitdmg.nextInt(3) + this.getSTR() - 5;
 	    System.out.println(this+" slashed at "+other+" and did "+dmg+" damage.");
 	}else{
@@ -35,22 +35,30 @@ public class Rogue extends Adventurer{
 	other.setHP(other.getHP() - dmg);
 	dmg = 0;
     }
-    public void special(Adventurer other){
+    public void specialAttack(Adventurer other){
 	Random hitc = new Random();
 	Random sphitdmg = new Random();
 	int spdmg;
-	if (this.getDEX() > other.getDEX()-2){
-	    spdmg = sphitdmg.nextInt(3) + this.getDEX() + 1;
-	    System.out.println(this+" backstabbed "+other+" and did "+spdmg+" damage.");
-	}else if ((this.getDEX() / (other.getDEX()-2)) > hitc.nextDouble()){
-	    spdmg = sphitdmg.nextInt(3) + this.getDEX() + 1;
-	    System.out.println(this+" backstabbed "+other+" and did "+spdmg+" damage.");
-	}else{
-	    System.out.println(this+" attempted to backstab "+other+" and missed.");
+	if (stamina >= 3){
+	    if (this.getDEX() > other.getDEX()-2){
+		spdmg = sphitdmg.nextInt(3) + this.getDEX() - 4;
+		System.out.println(this+" backstabbed "+other+" and did "+spdmg+" damage.");
+	    }else if ((this.getDEX() / (other.getDEX()-2)) < hitc.nextDouble()){
+		spdmg = sphitdmg.nextInt(3) + this.getDEX() - 4;
+		System.out.println(this+" backstabbed "+other+" and did "+spdmg+" damage.");
+	    }else{
+		System.out.println(this+" attempted to backstab "+other+" and missed.");
+		spdmg = 0;
+	    }
+	    other.setHP(other.getHP() - spdmg);
 	    spdmg = 0;
+	    setStamina(stamina - 3);
+	}else{
+	    System.out.println("Not enough stamina. Performing a regular attack.");
+	    attack(other);
 	}
-	other.setHP(other.getHP() - spdmg);
-	spdmg = 0;
-	setStamina(stamina - 3);
+    }
+	public String getStats(){
+	    return super.getStats()+" Stamina: "+getStamina();
     }
 }
