@@ -1,5 +1,5 @@
 import java.util.Random;
-public class Adventurer{
+public abstract class Adventurer{
     private String name;
     private int HP, XP, STR, INT, DEX;
     public Adventurer(){
@@ -48,15 +48,15 @@ public class Adventurer{
     public String toString(){
 	return getName();
     }
-    public void attack(Adventurer other){
-	Random hitc = new Random();
+    abstract void attack(Adventurer other);
+    /*Random hitc = new Random();
 	Random hitdmg = new Random();
 	int dmg;
 	if (this.getDEX() > other.getDEX()){
-	    dmg = hitdmg.nextInt(3) + this.getSTR() - 4;
+	    dmg = hitdmg.nextInt(3) + this.getSTR() - 6;
 	    System.out.println(this+" attacks "+other+" and did "+dmg+" damage.");
-	}else if ((this.getDEX() / other.getDEX()) > hitc.nextDouble()){
-	    dmg = hitdmg.nextInt(3) + this.getSTR() - 4;
+	}else if ((this.getDEX() / other.getDEX()) < hitc.nextDouble()){
+	    dmg = hitdmg.nextInt(3) + this.getSTR() - 6;
 	    System.out.println(this+" attacks "+other+" and did "+dmg+" damage.");
 	}else{
 	    System.out.println(this+" attacks "+other+" and missed.");
@@ -64,16 +64,16 @@ public class Adventurer{
 	}
 	other.setHP(other.getHP() - dmg);
 	dmg = 0;
-    }
-    public void special(Adventurer other){
-	Random hitc = new Random();
+	}*/
+    abstract void specialAttack(Adventurer other);
+	/*Random hitc = new Random();
 	Random sphitdmg = new Random();
 	int spdmg;
-	if (this.getDEX() > other.getDEX()-2){
-	    spdmg = sphitdmg.nextInt(3) + this.getSTR() + 2;
+	if (this.getDEX() > other.getDEX()-1){
+	    spdmg = sphitdmg.nextInt(3) + this.getSTR() - 4;
 	    System.out.println(this+" unleashes a barrage of attacks against "+other+" and did "+spdmg+" damage.");
-	}else if ((this.getDEX() / (other.getDEX()-2)) > hitc.nextDouble()){
-	    spdmg = sphitdmg.nextInt(3) + this.getSTR() + 2;
+	}else if ((this.getDEX() / (other.getDEX()-1)) < hitc.nextDouble()){
+	    spdmg = sphitdmg.nextInt(3) + this.getSTR() - 4;
 	    System.out.println(this+" unleashes a barrage of attacks against "+other+" and did "+spdmg+" damage.");
 	}else{
 	    System.out.println(this+" unleashes a barrage of attacks against "+other+" and missed.");
@@ -81,5 +81,8 @@ public class Adventurer{
 	}
 	other.setHP(other.getHP() - spdmg);
 	spdmg = 0;
+	}*/
+    public String getStats(){
+	return this+"\n HP: "+getHP()+" STR: "+getSTR()+" INT: "+getINT()+" DEX "+getDEX();
     }
 }
