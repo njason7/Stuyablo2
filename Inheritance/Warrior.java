@@ -10,10 +10,7 @@ public class Warrior extends Adventurer{
     public Warrior(String s, int startHP){
 	super(s,startHP);
 	setSTR(13);
-	setRage(10);
-    }
-    public String warcry(){
-	return "CHAAARGGEEEEEE";
+	setRage(0);
     }
     public void setRage(int rage){
 	this.rage=rage;
@@ -26,10 +23,10 @@ public class Warrior extends Adventurer{
 	Random hitdmg = new Random();
 	int dmg;
 	if (this.getDEX() > other.getDEX()){
-	    dmg = hitdmg.nextInt(3) + this.getSTR() - 4;
+	    dmg = hitdmg.nextInt(3) + this.getSTR() - 6;
 	    System.out.println(this+" charges at "+other+" and did "+dmg+" damage.");
-	}else if ((this.getDEX() / other.getDEX()) > hitc.nextDouble()){
-	    dmg = hitdmg.nextInt(3) + this.getSTR() - 4;
+	}else if ((this.getDEX() / other.getDEX()) < hitc.nextDouble()){
+	    dmg = hitdmg.nextInt(3) + this.getSTR() - 6;
 	    System.out.println(this+" charges at "+other+" and did "+dmg+" damage.");
 	}else{
 	    System.out.println(this+" charges at "+other+" and missed.");
@@ -37,23 +34,32 @@ public class Warrior extends Adventurer{
 	}
 	other.setHP(other.getHP() - dmg);
 	dmg = 0;
+	rage += 2;
     } 
-    public void special(Adventurer other){
+    public void specialAttack(Adventurer other){
 	Random hitc = new Random();
 	Random sphitdmg = new Random();
 	int spdmg;
-	if (this.getDEX() > other.getDEX()-2){
-	    spdmg = sphitdmg.nextInt(3) + this.getSTR() + 2;
-	    System.out.println(this+" crushes "+other+" and did "+spdmg+" damage.");
-	}else if ((this.getDEX() / (other.getDEX()-2)) > hitc.nextDouble()){
-	    spdmg = sphitdmg.nextInt(3) + this.getSTR() + 2;
-	    System.out.println(this+" crushes "+other+" and did "+spdmg+" damage.");
-	}else{
-	    System.out.println(this+" attempted to crush "+other+" and missed.");
+	if (rage >= 5){
+	    if (this.getDEX() > other.getDEX()-2){
+		spdmg = sphitdmg.nextInt(3) + this.getSTR() - 4;
+		System.out.println(this+" crushes "+other+" and did "+spdmg+" damage.");
+	    }else if ((this.getDEX() / (other.getDEX()-2)) < hitc.nextDouble()){
+		spdmg = sphitdmg.nextInt(3) + this.getSTR() - 4;
+		System.out.println(this+" crushes "+other+" and did "+spdmg+" damage.");
+	    }else{
+		System.out.println(this+" attempted to crush "+other+" and missed.");
+		spdmg = 0;
+	    }
+	    other.setHP(other.getHP() - spdmg);
 	    spdmg = 0;
+	    setRage(rage - 5);
+	}else{
+	    System.out.println("Not enough rage. Performing a regular attack.");
+	    attack(other);
 	}
-	other.setHP(other.getHP() - spdmg);
-	spdmg = 0;
-	setRage(rage - 2);
+    }
+    public String getStats(){
+	return super.getStats()+" Rage: "+getRage();
     }
 }
