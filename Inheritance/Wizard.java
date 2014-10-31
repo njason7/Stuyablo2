@@ -24,9 +24,15 @@ public class Wizard extends Adventurer{
 	int dmg;
 	if (this.getDEX() > other.getDEX()){
 	    dmg = hitdmg.nextInt(3) + this.getSTR() - 9;
+	    if (dmg < 0){
+		dmg = 0;
+	    }
 	    System.out.println(this+" poked "+other+" and did "+dmg+" damage.");
 	}else if ((this.getDEX() / other.getDEX()) < hitc.nextDouble()){
 	    dmg = hitdmg.nextInt(3) + this.getSTR() - 9;
+	    if (dmg < 0){
+		dmg = 0;
+	    }
 	    System.out.println(this+" poked "+other+" and did "+dmg+" damage.");
 	}else{
 	    System.out.println(this+" tried to poke "+other+" and missed.");
@@ -42,9 +48,15 @@ public class Wizard extends Adventurer{
 	if (mana >= 5){
 	    if (this.getINT() > other.getDEX()-2){
 		spdmg = sphitdmg.nextInt(3) + this.getINT() - 4;
+		if (spdmg < 0){
+		    spdmg = 0;
+		}
 		System.out.println(this+" casted Fire against "+other+" and did "+spdmg+" damage.");
 	    }else if ((this.getINT() / (other.getDEX()-2)) < hitc.nextDouble()){
 		spdmg = sphitdmg.nextInt(3) + this.getINT() - 4;
+		if (spdmg < 0){
+		    spdmg = 0;
+		}
 		System.out.println(this+" casted Fire against "+other+" and did "+spdmg+" damage.");
 	    }else{
 		System.out.println(this+" attempted to cast Fire against "+other+" and missed.");
