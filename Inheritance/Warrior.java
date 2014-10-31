@@ -24,9 +24,15 @@ public class Warrior extends Adventurer{
 	int dmg;
 	if (this.getDEX() > other.getDEX()){
 	    dmg = hitdmg.nextInt(3) + this.getSTR() - 6;
+	    if (dmg < 0){
+		dmg = 0;
+	    }
 	    System.out.println(this+" charges at "+other+" and did "+dmg+" damage.");
 	}else if ((this.getDEX() / other.getDEX()) < hitc.nextDouble()){
-	    dmg = hitdmg.nextInt(3) + this.getSTR() - 6;
+	    dmg = hitdmg.nextInt(3) + this.getSTR() - 6;	
+	    if (dmg < 0){
+		dmg = 0;
+	    }
 	    System.out.println(this+" charges at "+other+" and did "+dmg+" damage.");
 	}else{
 	    System.out.println(this+" charges at "+other+" and missed.");
@@ -43,10 +49,16 @@ public class Warrior extends Adventurer{
 	if (rage >= 5){
 	    if (this.getDEX() > other.getDEX()-2){
 		spdmg = sphitdmg.nextInt(3) + this.getSTR() - 4;
+		if (spdmg < 0){
+		    spdmg = 0;
+		}
 		System.out.println(this+" crushes "+other+" and did "+spdmg+" damage.");
 	    }else if ((this.getDEX() / (other.getDEX()-2)) < hitc.nextDouble()){
 		spdmg = sphitdmg.nextInt(3) + this.getSTR() - 4;
 		System.out.println(this+" crushes "+other+" and did "+spdmg+" damage.");
+		if (spdmg < 0){
+		    spdmg = 0;
+		}
 	    }else{
 		System.out.println(this+" attempted to crush "+other+" and missed.");
 		spdmg = 0;
