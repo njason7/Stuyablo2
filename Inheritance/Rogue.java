@@ -24,9 +24,15 @@ public class Rogue extends Adventurer{
 	int dmg;
 	if (this.getDEX() > other.getDEX()){
 	    dmg = hitdmg.nextInt(3) + this.getSTR() - 5;
+	    if (dmg < 0){
+		dmg = 0;
+	    }
 	    System.out.println(this+" slashed at "+other+" and did "+dmg+" damage.");
 	}else if ((this.getDEX() / other.getDEX()) < hitc.nextDouble()){
 	    dmg = hitdmg.nextInt(3) + this.getSTR() - 5;
+	    if (dmg < 0){
+		dmg = 0;
+	    }
 	    System.out.println(this+" slashed at "+other+" and did "+dmg+" damage.");
 	}else{
 	    System.out.println(this+" tried to slash "+other+" and missed.");
@@ -42,9 +48,15 @@ public class Rogue extends Adventurer{
 	if (stamina >= 3){
 	    if (this.getDEX() > other.getDEX()-2){
 		spdmg = sphitdmg.nextInt(3) + this.getDEX() - 4;
+		if (spdmg < 0){
+		    spdmg = 0;
+		}
 		System.out.println(this+" backstabbed "+other+" and did "+spdmg+" damage.");
 	    }else if ((this.getDEX() / (other.getDEX()-2)) < hitc.nextDouble()){
 		spdmg = sphitdmg.nextInt(3) + this.getDEX() - 4;
+		if (spdmg < 0){
+		    spdmg = 0;
+		}
 		System.out.println(this+" backstabbed "+other+" and did "+spdmg+" damage.");
 	    }else{
 		System.out.println(this+" attempted to backstab "+other+" and missed.");
